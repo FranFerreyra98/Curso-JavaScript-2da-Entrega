@@ -19,17 +19,16 @@ let listaProductos = [
     }
 ];
 
+let carrito = [];
+
 let contenedorProductos = document.getElementById("contenedor-productos");
-let boton = document.getElementById("boton");
 let tabla;
 
 function inicializarElementos(){
     tabla = document.getElementById("tablaProductos")
 }
 
-function inicializarEventos(){
-    boton.onclick = (event) => sumarLista (event)
-}
+
 
 
 
@@ -51,8 +50,22 @@ for(const producto of listaProductos){
 
 }
 
+let boton = document.querySelectorAll("#boton");
+console.log(boton);
+
+boton.forEach(btn => {
+    btn.addEventListener("click", console.log("Hola"))
+})
+
+// function inicializarEventos(){
+//     boton.forEach = (btn) => btn.addEventListener("click",console.log("Hola"))
+// }
+
 function sumarLista(){
-    listaProductos.forEach((producto) => {
+    const boton1 = listaProductos.find((producto) => producto.nombre === "Branca");
+    const boton2 = listaProductos.find((producto) => producto.nombre === "Bulldog");
+    const boton3 = listaProductos.find((producto) => producto.nombre === "Absolut");
+    
         let filaTabla = document.createElement("tr");
         filaTabla.innerHTML = `
         <td>${producto.nombre}</td>
@@ -60,7 +73,7 @@ function sumarLista(){
         <td>${producto.tipo}</td>`
 
         tabla.tBodies[0].append(filaTabla);
-    });
+    ;
 }
 
 function limpiarTabla(){
@@ -71,7 +84,7 @@ function limpiarTabla(){
 
 function main(){
     inicializarElementos()
-    inicializarEventos()
+    // inicializarEventos()
 }
 
 main()
