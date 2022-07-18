@@ -39,9 +39,9 @@ for(const producto of listaProductos){
     columna.innerHTML = `
         <div class="card">
             <div class="card-body">
-                <p class="card-text">Nombre: <b>${producto.nombre}</b></p>
-                <p class="card-text">Precio: <b>${producto.precio}</b></p>
-                <p class="card-text">Tipo: <b>${producto.tipo}</b></p>
+                <p class="card-text">Nombre: <b class="title">${producto.nombre}</b></p>
+                <p class="card-text" >Precio: <b class="price">${producto.precio}</b></p>
+                <p class="card-text">Tipo: <b class="type">${producto.tipo}</b></p>
                 <button type="button" id="boton" class="btn btn-primary">Agregar al carrito</button>
             </div>
         </div>
@@ -51,26 +51,28 @@ for(const producto of listaProductos){
 }
 
 let boton = document.querySelectorAll("#boton");
-console.log(boton);
+let hola = (e) => {
+    console.log(e.target.closest(".card"))
+}
 
 boton.forEach(btn => {
-    btn.addEventListener("click", console.log("Hola"))
+    btn.addEventListener(`click`, sumarLista)
 })
 
-// function inicializarEventos(){
-//     boton.forEach = (btn) => btn.addEventListener("click",console.log("Hola"))
-// }
 
-function sumarLista(){
-    const boton1 = listaProductos.find((producto) => producto.nombre === "Branca");
-    const boton2 = listaProductos.find((producto) => producto.nombre === "Bulldog");
-    const boton3 = listaProductos.find((producto) => producto.nombre === "Absolut");
-    
+function sumarLista(e){
+
+    const boton = e.target
+    const item = boton.closest(".card")
+    const title = item.querySelector(".title").textContent
+    const price = item.querySelector(".price").textContent
+    const type = item.querySelector(".type").textContent
+
         let filaTabla = document.createElement("tr");
         filaTabla.innerHTML = `
-        <td>${producto.nombre}</td>
-        <td>${producto.precio}</td>
-        <td>${producto.tipo}</td>`
+        <td>${title}</td>
+        <td>${price}</td>
+        <td>${type}</td>`
 
         tabla.tBodies[0].append(filaTabla);
     ;
@@ -84,7 +86,6 @@ function limpiarTabla(){
 
 function main(){
     inicializarElementos()
-    // inicializarEventos()
 }
 
 main()
